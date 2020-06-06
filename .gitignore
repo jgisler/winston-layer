@@ -104,3 +104,4 @@ dist
 .tern-port
 winston-layer-out.yaml
 dist.zip
+scripts/npm
