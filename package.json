@@ -1,0 +1,42 @@
+{
+   "name": "winston-layer",
+   "version": "1.0.0",
+   "description": "Winston dependencies as an AWS Lambda Layer",
+   "main": "index.js",
+   "config": {
+      "scripts_dir": "scripts/npm",
+      "scripts_repo": "https://github.com/jgisler/npm-scripts"
+   },
+   "scripts": {
+      "audit": "npm audit",
+      "test": "npx mocha test/unit --recursive",
+      "clean": "rimraf node_modules *-out.yaml dist.zip scripts/npm && npm install && npm run cs",
+      "cs": "git clone ${npm_package_config_scripts_repo} ${npm_package_config_scripts_dir}",
+      "config": "npx rimraf .env && ${npm_package_config_scripts_dir}/config.js $1",
+      "zip": "${npm_package_config_scripts_dir}/zip_layer.sh winston-layer",
+      "package": "npm run zip && ${npm_package_config_scripts_dir}/cf_package.sh $1",
+      "deploy": "./${npm_package_config_scripts_dir}/cf_deploy.sh $1",
+      "deploy:test-us-west-2": "npm run clean && npm install && npm run cs && npm run config test-us-west-2 && "
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jgisler/winston-layer.git"
+   },
+   "author": "James Gisler",
+   "license": "Apache-2.0",
+   "bugs": {
+      "url": "https://github.com/jgisler/winston-layer/issues"
+   },
+   "homepage": "https://github.com/jgisler/winston-layer#readme",
+   "dependencies": {},
+   "devDependencies": {
+      "config": "^3.3.1",
+      "js-yaml": "^3.14.0"
+   },
+   "keywords": [
+      "AWS",
+      "Layer",
+      "Lambda",
+      "Serverless"
+   ]
+}

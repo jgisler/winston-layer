@@ -1,0 +1,13 @@
+Environment:
+   Region: us-west-2
+   Environment: test
+   StackName: winston-layer
+   DeploymentBucket: deployment.${Region}
+   DeploymentPrefix: ${StackName}
+   Profile: default
+CloudFormation:
+   StackName: winston-layer
+Tags:
+   Email: jim.gisler@gmail.com
+   Application: ${StackName}
+   EnvironmentName: ${Environment}-${Region}
